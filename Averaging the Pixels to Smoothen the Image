@@ -1,0 +1,48 @@
+img= im2double(imread("soldier.jpg"));   %this converts the elements of the Matrix from uint8 to double precision ie- 255 corresponds to 1.0000 and 0 corresponds to 0.0000
+img2=ones(800,1280);
+figure;
+imshow(img);
+rsize= size(img,1);    %number of rows in the image
+csize= size(img,2);    %number of columns in the image 
+for i=1:rsize
+    for j=1:csize
+        if i==1 || i==rsize || j==1 || j==csize
+            
+            if i==1
+                
+                if j==1
+                    img2(i,j)= (img(i,j)+img(i,j+1)+img(i+1,j)+img(i+1,j+1))/9;
+                elseif j==csize
+                    img2(i,j)= (img(i,j)+img(i+1,j)+img(i,j-1)+img(i+1,j-1))/9;
+                else 
+                    img2(i,j)= (img(i,j)+img(i,j-1)+img(i+1,j-1)+img(i+1,j)+img(i+1,j+1)+img(i,j+1))/9;
+                end
+                
+            end
+            
+            if i==rsize
+                
+                if j==1
+                    img2(i,j)= (img(i,j)+img(i-1,j)+img(i-1,j+1)+img(i,j+1))/9;
+                elseif j==csize
+                    img2(i,j)= (img(i,j)+img(i,j-1)+img(i-1,j-1)+img(i-1,j))/9;
+                else 
+                    img2(i,j)= (img(i,j)+img(i,j-1)+img(i,j+1)+img(i-1,j-1)+img(i-1,j)+img(i-1,j+1))/9;
+                end
+            
+            end
+        
+        else
+                img2(i,j)= (img(i,j)+img(i-1,j-1)+img(i,j-1)+img(i+1,j-1)+img(i-1,j)+img(i+1,j)+img(i-1,j+1)+img(i,j+1)+img(i+1,j+1))/9;
+                
+        end
+    end
+end
+    
+
+map= hsv(256);
+imgrgb= ind2rgb(img2,map);
+imwrite(double(img2),'soldier1.jpg');
+figure;
+imshow(img2);
+
