@@ -1,0 +1,16 @@
+function findlines(img)
+    
+    b= edge(img,'canny');       
+    figure; imshow(b);
+    [H,theta,rho] = hough(b);
+    P = houghpeaks(H,15,'threshold',ceil(0.3*max(H(:))));
+    lines = houghlines(b,theta,rho,P,'FillGap',5,'MinLength',7);
+    figure, imshow(img), hold on
+    for k = 1:length(lines)
+        xy = [lines(k).point1; lines(k).point2];
+        plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+        plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+        plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+    end
+
+end
