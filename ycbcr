@@ -1,0 +1,28 @@
+ %%-------------------------
+  
+  %Author- Devansh Srivastava
+  
+  % Demonstration of Y Cb Cr channels. While compression, the image is
+  % converted to YCbCr from RGB because Y Cb Cr seperates the Luminance and
+  % Color componenets of the image. Color Component can be downsampled to
+  % large extent without making much impact on the quality of the image.
+  
+  % c=setdiff(A,B)---> give all the elements which belong to A but not in B. 
+  %    In c, the elements are arranged in ascending order. A and B are
+  %    vectors.
+  % d= intmax(type)----> d stores the max possible value of any datatype.
+  %    For ex- for uint8, d=255.
+ %%------------------------
+ 
+ i=imread('peppers.png');
+ figure; imshow(i);
+ i=rgb2ycbcr(i);   %converts rgb 2 ycbcr channel
+ figure; imshow(i);
+ for k=1:3
+     ii=i;    %create duplicate of the image
+     ii(:,:,setdiff([1,2,3],k))=intmax(class(ii))/2;  
+     figure;
+     imshow(ycbcr2rgb(ii));
+ end
+ 
+ %%-----------------------------
