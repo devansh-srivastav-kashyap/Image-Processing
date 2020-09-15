@@ -1,2 +1,3 @@
 # Image-Processing
-This repository contains all the MATLAB programs for processing an Image.
+
+This repository is intended to have the small programs related to Image Processing.  
