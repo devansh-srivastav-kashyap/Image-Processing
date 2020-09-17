@@ -1,0 +1,21 @@
+% A demonstration of the color theory. Any colored image is composed of three layers 
+% of Red, Green and Blue colors.
+
+im=imread('peppers.png');
+
+%seperating the three layers
+redd=im(:,:,1);
+greenn=im(:,:,2);
+bluee=im(:,:,3);
+
+null= zeros(size(im,1),size(im,2),'uint8');
+
+%cat function is used to concatenate the arrays along z dimension.
+
+red= cat(3,redd,null,null); figure;imshow(red);title('Red Channel');
+green= cat(3,null,greenn,null);figure;imshow(green);title('Green Channel');
+blue= cat(3,null,null,bluee);figure;imshow(blue);title('Blue Channel');
+
+%Recombination of the Image
+im2=cat(3,redd,greenn,bluee);
+figure; imshow(im2);
